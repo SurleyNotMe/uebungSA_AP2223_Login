@@ -7,7 +7,10 @@ class CentralWidget(QWidget):
         super(CentralWidget, self).__init__(parent)
 
         self.__login = QPushButton("Login")
+        self.__login.clicked.connect(self.check_login)
+
         self.__logout = QPushButton("Logout")
+        self.__logout.setEnabled(False)
 
         self.__benutzername = QLabel("Benutzername")
         self.__passwort = QLabel("Passwort")
@@ -51,15 +54,32 @@ class CentralWidget(QWidget):
         self.setLayout(layout)
 
 
+    ERWARTETE_BENUTZERDATEN = {
+        "benutzername": "MaxMustermann",
+        "kennwort": "SicheresPasswort123",  # Ein echtes Passwort sollte gehasht werden!
+        "token": "AFFE"
+    }
 
 
+    @pyqtSlot()
+    def check_login(self):
+        """Simuliert den Login-Prozess und aktiviert/deaktiviert die Buttons."""
+
+        benutzername = self.__line_edit.text()
+        kennwort = self.__line_edit_pw.text()
+        token = self.__line_edit_token.text()
 
 
+        if benutzername == ERWARTETE_BENUTZERDATEN["benutzername"] and kennwort == ERWARTETE_BENUTZERDATEN["kennwort"] and token == ERWARTETE_BENUTZERDATEN["token"]:
+            # Login erfolgreich: LOGIN deaktivieren, LOGOUT aktivieren
+            self.__login.setEnabled(False)
+            self.__logout.setEnabled(True)
+            self.__text_browser.append("🟢 Login erfolgreich. Logout ist nun möglich.")
+        else:
+            # Optional: Fehlermeldung anzeigen
+            self.__text_browser.append("🔴 Login fehlgeschlagen. Bitte Eingaben prüfen.")
 
-
-
-
-    '''
+'''
     
     @pyqtSlot()
     def append(self):
