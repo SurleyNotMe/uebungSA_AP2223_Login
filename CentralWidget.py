@@ -16,6 +16,7 @@ class CentralWidget(QWidget):
 
 
         self.__line_edit = QLineEdit()
+        #Platzhalter um vor der ersten eingabe
         self.__line_edit.setPlaceholderText("max_power")
 
 
