@@ -21,8 +21,14 @@ class CentralWidget(QWidget):
 
 
         self.__line_edit_pw = QLineEdit()
+        #Echomode Passwort zwischen speichern
+        self.__line_edit_pw.setEchoMode(QLineEdit.EchoMode.Password)
+
 
         self.__line_edit_token = QLineEdit()
+        #Erlaubt als Eingabe 4 Hexadezimalzahlen
+        self.__line_edit_token.setInputMask("HHHH")
+
 
         self.__text_browser = QTextBrowser()
 
