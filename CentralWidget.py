@@ -1,6 +1,13 @@
 from PyQt6.QtCore import pyqtSlot
 from PyQt6.QtWidgets import QWidget, QPushButton, QLineEdit, QTextBrowser, QVBoxLayout, QGridLayout, QLabel
 
+# Definiere die Daten direkt als Klassenvariable
+ERWARTETE_BENUTZERDATEN = {
+    "benutzername": "MaxMustermann",
+    "kennwort": "SicheresPasswort123",
+    "token": "AFFE"
+}
+
 
 class CentralWidget(QWidget):
     def __init__(self, parent=None):
@@ -54,29 +61,27 @@ class CentralWidget(QWidget):
         self.setLayout(layout)
 
 
-    ERWARTETE_BENUTZERDATEN = {
-        "benutzername": "MaxMustermann",
-        "kennwort": "SicheresPasswort123",  # Ein echtes Passwort sollte gehasht werden!
-        "token": "AFFE"
-    }
-
-
     @pyqtSlot()
     def check_login(self):
         """Simuliert den Login-Prozess und aktiviert/deaktiviert die Buttons."""
 
+        # 1. Eingabewerte aus den QLineEdit-Feldern abrufen
         benutzername = self.__line_edit.text()
         kennwort = self.__line_edit_pw.text()
         token = self.__line_edit_token.text()
 
+        # 2. Prüfen, ob ALLE DREI Werte korrekt sind (mit 'and')
+        # Die Zeilenumbrüche (\) dienen nur der besseren Lesbarkeit.
+        if benutzername == ERWARTETE_BENUTZERDATEN["benutzername"] and \
+                kennwort == ERWARTETE_BENUTZERDATEN["kennwort"] and \
+                token == ERWARTETE_BENUTZERDATEN["token"]:
 
-        if benutzername == ERWARTETE_BENUTZERDATEN["benutzername"] and kennwort == ERWARTETE_BENUTZERDATEN["kennwort"] and token == ERWARTETE_BENUTZERDATEN["token"]:
-            # Login erfolgreich: LOGIN deaktivieren, LOGOUT aktivieren
+            # Login erfolgreich
             self.__login.setEnabled(False)
             self.__logout.setEnabled(True)
             self.__text_browser.append("🟢 Login erfolgreich. Logout ist nun möglich.")
         else:
-            # Optional: Fehlermeldung anzeigen
+            # Login fehlgeschlagen
             self.__text_browser.append("🔴 Login fehlgeschlagen. Bitte Eingaben prüfen.")
 
 '''
