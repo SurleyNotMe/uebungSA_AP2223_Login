@@ -26,12 +26,12 @@ class CentralWidget(QWidget):
 
 
         self.__line_edit = QLineEdit()
-        #Platzhalter um vor der ersten eingabe
+        #Platzhalter um vor der ersten eingabe was zu haben
         self.__line_edit.setPlaceholderText("max_power")
 
 
         self.__line_edit_pw = QLineEdit()
-        #Echomode Passwort zwischen speichern
+        #Echomode Passwort zwischen speichern zu verbergen
         self.__line_edit_pw.setEchoMode(QLineEdit.EchoMode.Password)
 
 
